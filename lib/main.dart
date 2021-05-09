@@ -17,10 +17,11 @@ class _QuizzState extends State<Quizz> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-        initialRoute: GoodLuck.id, routes: {
-      GoodLuck.id: (context) => GoodLuck(),
-      MainApp.id: (context) => MainApp(),
-    });
+        debugShowCheckedModeBanner: false,
+        initialRoute: GoodLuck.id,
+        routes: {
+          GoodLuck.id: (context) => GoodLuck(),
+          MainApp.id: (context) => MainApp(),
+        });
   }
 }

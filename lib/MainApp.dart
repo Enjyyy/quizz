@@ -1,6 +1,10 @@
+import 'package:audioplayers/audioplayers.dart';
+import 'package:audioplayers/audio_cache.dart';
 import 'package:flutter/material.dart';
 import 'questionsBank.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'GoodLuck.dart';
+import 'package:flutter/services.dart';
 
 class MainApp extends StatefulWidget {
   static const id = 'mainApp';
@@ -13,21 +17,54 @@ class MainApp extends StatefulWidget {
 class _MainAppState extends State<MainApp> {
   int questionNumber = 0;
   int score = 0;
+
   void controller() {
     if (questionNumber == questions.length - 1) {
-      Alert(context: context, title: "your score is", desc: "$score out of ${questions.length}").show();
+      Alert(
+          type: AlertType.success,
+          context: context,
+          title: "DONE",
+          desc: "your score is $score out of ${questions.length}",
+          closeIcon: IconButton(
+            icon: Icon(
+              Icons.circle,
+              color: Colors.red,
+            ),
+            onPressed: () {
+              SystemNavigator.pop();
+            },
+          ),
+          buttons: [
+            DialogButton(
+                child: Text(
+                  'Try again',
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
+                ),
+                onPressed: () {
+                  Navigator.pushNamed(context, GoodLuck.id);
+                })
+          ],
+          closeFunction: () {
+            Navigator.pushNamed(context, MainApp.id);
+            super.initState();
+          }).show();
       questionNumber = 0;
-      score=0;
+      score = 0;
     } else {
       questionNumber += 1;
     }
   }
 
+  static AudioCache player= new AudioCache();
+
   int check(int choiceNumber) {
     if (choiceNumber == questions[questionNumber][4]) {
+     player.play('assets/sample1.wav');
       score++;
     }
-    print(score);
     return score;
   }
 
@@ -123,9 +160,12 @@ class _MainAppState extends State<MainApp> {
             ),
             Row(
               children: [
-                Text(
-                  '      Question: ${questionNumber+1} of ${questions.length}',
-                  style: TextStyle(fontSize: 10, color: Colors.deepPurple),
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Text(
+                    '      Question: ${questionNumber + 1} of ${questions.length}',
+                    style: TextStyle(fontSize: 12, color: Colors.deepPurple),
+                  ),
                 ),
               ],
             )
