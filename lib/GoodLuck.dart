@@ -21,6 +21,6 @@ class _GoodLuckState extends State<GoodLuck> {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: Image.asset('assets/goodluck.jpg'));
+        home: Image.asset('assets/CAT0.jpg'));
   }
 }

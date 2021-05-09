@@ -1,4 +1,3 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:flutter/material.dart';
 import 'questionsBank.dart';
@@ -58,11 +57,12 @@ class _MainAppState extends State<MainApp> {
     }
   }
 
-  static AudioCache player= new AudioCache();
+
 
   int check(int choiceNumber) {
     if (choiceNumber == questions[questionNumber][4]) {
-     player.play('assets/sample1.wav');
+    AudioCache player= new AudioCache();
+     player.play('sample1.wav');
       score++;
     }
     return score;
